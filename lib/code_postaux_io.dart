@@ -8,19 +8,19 @@ import 'src/city.dart';
 
 export 'src/city.dart';
 
-Map _zipCodeJson;
+Map? _zipCodeJson;
 
 /// Find a [List<City>] corresponding to the [zipCode]
 Future<List<City>> find(String zipCode) async {
   if (_zipCodeJson == null) {
     _zipCodeJson = await getZipCodes();
   }
-  List cities = _zipCodeJson[zipCode];
-  if (cities.length == 0) {
-    return [new City.fromJson(zipCode, _zipCodeJson[zipCode].first)];
+   final cities = (_zipCodeJson?[zipCode]) as List<dynamic>?;
+  if (cities == null || cities.length == 0) {
+    return [new City.fromJson(zipCode, _zipCodeJson?[0].first)];
   } else {
     return cities
-        .map((List infos) => new City.fromJson(zipCode, infos))
+        .map((city) =>  City.fromJson(zipCode, city))
         .toList();
   }
 }

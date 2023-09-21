@@ -4,8 +4,10 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:path/path.dart';
 
 Future<Map> getZipCodes() async {
-  File zipCode = new File("packages/code_postaux/code_postaux.json");
-  return JSON.decode(await zipCode.readAsString());
+  final filePath = join(Directory.current.path, 'lib', 'assets', 'code_postaux.json');
+  File zipCode = new File(filePath);
+  return jsonDecode(await zipCode.readAsString());
 }

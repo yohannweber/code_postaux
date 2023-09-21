@@ -9,7 +9,7 @@ import 'package:test/test.dart';
 main() {
   group('browser', () {
     test('get info', () async {
-      Map zipCode = await getZipCodes();
+      Map<String, dynamic>? zipCode = await getZipCodes();
       expect(zipCode, isNotNull);
     });
 
